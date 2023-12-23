@@ -35,4 +35,4 @@ const BRI = new Bank(0);
 git clone https://github.com/Ftthreign/small-app-bank-amount-with-oop-implemented.git
 ```
 
-> <font color="orange">BUT I RECOMMEND TO USE ANOTHER LANGUANGE TO LEARN OOP, LIKE JAVA, C++, Typescript and many more with strict-type languange</font>
+> <span style="color:orange;">BUT I RECOMMEND TO USE ANOTHER LANGUANGE TO LEARN OOP, LIKE JAVA, C++, Typescript and many more with strict-type languange</span>
