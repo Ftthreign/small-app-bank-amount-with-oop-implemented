@@ -28,3 +28,11 @@ class Bank {
 
 const BRI = new Bank(0);
 ```
+
+- You Can clone this repo if you want to modify it and learn it more about OOP
+
+```bash
+git clone https://github.com/Ftthreign/small-app-bank-amount-with-oop-implemented.git
+```
+
+> BUT I RECOMMEND TO USE ANOTHER LANGUANGE TO LEARN OOP, LIKE JAVA, C++, Typescript and many more with strict-type languange
