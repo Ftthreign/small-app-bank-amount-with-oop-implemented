@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .bank {
+        height: 500px;
+        width: 500px;
+        background-color: gold;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .text-title {
+        color: black;
+        text-align: center;
+        padding-top: 10px;
+      }
+
+      .data-input {
+        display: flex;
+        justify-content: center;
+        margin: 40px;
+      }
+
+      #bankValue {
+        outline: none;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .button-tarik,
+      .button-depo {
+        width: 100px;
+      }
+
+      .error-message {
+        color: red;
+      }
+    </style>
+
+    <title>MyPage</title>
+  </head>
+  <body>
+    <div class="bank">
+      <h4 class="text-title">AKUN BANK</h4>
+      <div class="data-input">
+        <p>SALDO :</p>
+        <p id="bankValue">Rp. 0</p>
+      </div>
+      <div class="button-container">
+        <input type="text" name="data-bank" id="inputAmount" />
+        <button class="button-tarik" id="addWithdraw">TARIK TUNAI</button>
+        <button class="button-depo" id="addDeposit">DEPOSIT</button>
+      </div>
+    </div>
+    <script>
+      class Bank {
+        constructor(balance) {
+          this.balance = balance;
+        }
+
+        withdraw(withdraw) {
+          if (withdraw > this.balance) {
+            throw new Error("Nilai tarik tunai lebih dari Saldo");
+          }
+
+          this.balance -= withdraw;
+        }
+
+        deposit(depo) {
+          if (depo >= 1_000_000) {
+            throw new Error("Deposit untuk akun anak harus kurang dari 1 Juta");
+          }
+          this.balance += depo;
+        }
+      }
+
+      const BRI = new Bank(0);
+
+      const inputAmount = document.getElementById("inputAmount");
+      const bankValue = document.getElementById("bankValue");
+      const addWithdraw = document.getElementById("addWithdraw");
+      const addDeposit = document.getElementById("addDeposit");
+
+      const checkInput = () => {
+        const existingError = document.querySelector(".error-message");
+        const errorMessage = document.createElement("p");
+        if (inputAmount.value === "") {
+          if (!existingError) {
+            errorMessage.innerText = "ANDA BELUM MENGINPUTKAN APAPUN";
+            errorMessage.classList.add("error-message");
+            document.querySelector(".bank").appendChild(errorMessage);
+          }
+        } else if (existingError) {
+          existingError.parentNode.removeChild(existingError);
+        }
+      };
+
+      addWithdraw.addEventListener("click", () => {
+        BRI.withdraw(Number(inputAmount.value));
+        bankValue.innerText = BRI.balance;
+        checkInput();
+      });
+
+      addDeposit.addEventListener("click", () => {
+        BRI.deposit(Number(inputAmount.value));
+        bankValue.innerText = BRI.balance;
+        if (BRI.balance >= 20_000_000) {
+          throw new Error(
+            "Saldo anda melebihi batas, Silahkan Upgrade Kartu ATM anda"
+          );
+        }
+        checkInput();
+      });
+    </script>
+  </body>
+</html>
